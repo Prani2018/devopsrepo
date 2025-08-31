@@ -20,12 +20,10 @@ stages{
         }
 
         stage ('Deployments'){
-                stage ('Deploy to Staging Server'){
                     steps {
                         sh "scp **/*.war jenkins@${params.tomcat_stag}:/usr/share/tomcat/webapps"
                         deploy adapters: [ tomcat9(credentialsId: 'tomcatcred', path:'', url: 'http://54.165.43.152:8080/', contextPath: '', war: '**/*.war' )]
                     }
-                }
             }
         }
 }
